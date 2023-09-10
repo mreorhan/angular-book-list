@@ -1,0 +1,10 @@
+<div *ngIf="!book" class="flex h-full justify-content-center">
+  <p-progressSpinner></p-progressSpinner>
+</div>
+<ng-container *ngIf="book">
+<button pButton (click)="goToHome()">Home</button>
+<h2>Title: {{book?.title}}</h2>
+<img [src]="book?.coverImageUrl" class="" width="200"/>
+<h5>Author: {{book?.author}}</h5>
+<p>Summary: {{book?.description}}</p>
+</ng-container>

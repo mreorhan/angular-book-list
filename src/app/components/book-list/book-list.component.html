@@ -1,0 +1,27 @@
+<div *ngIf="!bookList" class="flex h-full justify-content-center">
+  <p-progressSpinner></p-progressSpinner>
+</div>
+<ng-container *ngIf="bookList">
+  <p-dataView [value]="filteredBookList" [paginator]="true" [rows]="9" filterBy="name"
+              [sortField]="sortField" [sortOrder]="sortOrder" layout="grid">
+    <ng-template pTemplate="header">
+      <div class="flex justify-content-end align-items-center">
+        <b class="mr-2">Category</b>
+        <p-dropdown styleClass="filter-dropdown" [options]="bookCategories" optionLabel="name"
+                    (onChange)="filterBooks($event)"></p-dropdown>
+      </div>
+    </ng-template>
+    <ng-template let-book pTemplate="gridItem">
+      <div class="col-4">
+        <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" (click)="goToBookDetails(book)">
+          <img class="w-9 sm:w-16rem xl:w-10rem shadow-2 block xl:block mx-auto border-round"
+               [src]="book.coverImageUrl" [alt]="book.title" height="250" width="120"/>
+          <div class="flex flex-column flex-1">
+            <div class="text-xl font-bold text-900">{{ book.title }}</div>
+            <span class="text-s font-semibold">{{book.author}}</span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataView>
+</ng-container>
